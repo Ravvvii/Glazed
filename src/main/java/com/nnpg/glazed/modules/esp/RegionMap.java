@@ -163,21 +163,8 @@ public class RegionMap extends Module {
 
         TextRenderer.get().begin(1.0, false, true);
 
-        // Overworld coords
-        int overworldX = (int) pos.x;
-        int overworldZ = (int) pos.z;
-
-// Nether coords (divide by 8)
-        int netherX = overworldX / 8;
-        int netherZ = overworldZ / 8;
-
-        String coordsText = String.format(
-            "Position: X: %d, Z: %d | Nether: X: %d, Z: %d",
-            overworldX, overworldZ, netherX, netherZ
-        );
-
+        String coordsText = String.format("Position: X: %d, Z: %d", (int)pos.x, (int)pos.z);
         TextRenderer.get().render(coordsText, ctx.mapX, infoY, Color.WHITE, false);
-
 
         int currentRegionId = mapData.getRegionAt(pos.x, pos.z);
         if (currentRegionId != -1) {
@@ -201,7 +188,7 @@ public class RegionMap extends Module {
             int legendY = legendStartY + i * 16;
             Renderer2D.COLOR.quad(ctx.mapX, legendY, 14, 14, regionTypeColors[i]);
         }
-        Renderer2D.COLOR.render(pass -> {});
+        Renderer2D.COLOR.render(null);
 
         TextRenderer.get().begin(1.0, false, true);
         for (int i = 0; i < regionTypes.length; i++) {
@@ -364,8 +351,8 @@ public class RegionMap extends Module {
             bgColor.a = (int)(ctx.transparency * 255.0);
 
             Renderer2D.COLOR.begin();
-        Renderer2D.COLOR.quad(ctx.mapX, ctx.mapY, ctx.getMapWidth(), ctx.getMapHeight(), bgColor);
-        Renderer2D.COLOR.render(pass -> {});
+            Renderer2D.COLOR.quad(ctx.mapX, ctx.mapY, ctx.getMapWidth(), ctx.getMapHeight(), bgColor);
+            Renderer2D.COLOR.render(null);
         }
 
         void renderRegionCells(MapRenderContext ctx, MapDataManager dataManager) {
@@ -390,7 +377,7 @@ public class RegionMap extends Module {
                 }
             }
 
-            Renderer2D.COLOR.render(pass -> {});
+            Renderer2D.COLOR.render(null);
         }
 
         void renderGridLines(MapRenderContext ctx, SettingColor gridColor) {
@@ -411,7 +398,7 @@ public class RegionMap extends Module {
                 Renderer2D.COLOR.quad(ctx.mapX, lineY, ctx.getMapWidth(), 1, lineColor);
             }
 
-            Renderer2D.COLOR.render(pass -> {});
+            Renderer2D.COLOR.render(null);
         }
 
         void renderRegionNumbers(MapRenderContext ctx, MapDataManager dataManager, double textScale) {
@@ -481,7 +468,7 @@ public class RegionMap extends Module {
             int rightBaseY = centerY - (int)(Math.sin(rightBaseAngle) * arrowSize);
 
             drawTriangleFilled(tipX, tipY, leftBaseX, leftBaseY, rightBaseX, rightBaseY, indicatorCol);
-            Renderer2D.COLOR.render(pass -> {});
+            Renderer2D.COLOR.render(null);
         }
 
         private void drawTriangleFilled(int x1, int y1, int x2, int y2, int x3, int y3, Color color) {
