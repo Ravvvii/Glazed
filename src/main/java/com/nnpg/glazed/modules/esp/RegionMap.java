@@ -163,21 +163,8 @@ public class RegionMap extends Module {
 
         TextRenderer.get().begin(1.0, false, true);
 
-        // Overworld coords
-        int overworldX = (int) pos.x;
-        int overworldZ = (int) pos.z;
-
-// Nether coords (divide by 8)
-        int netherX = overworldX / 8;
-        int netherZ = overworldZ / 8;
-
-        String coordsText = String.format(
-            "Position: X: %d, Z: %d | Nether: X: %d, Z: %d",
-            overworldX, overworldZ, netherX, netherZ
-        );
-
+        String coordsText = String.format("Position: X: %d, Z: %d", (int)pos.x, (int)pos.z);
         TextRenderer.get().render(coordsText, ctx.mapX, infoY, Color.WHITE, false);
-
 
         int currentRegionId = mapData.getRegionAt(pos.x, pos.z);
         if (currentRegionId != -1) {
@@ -201,7 +188,7 @@ public class RegionMap extends Module {
             int legendY = legendStartY + i * 16;
             Renderer2D.COLOR.quad(ctx.mapX, legendY, 14, 14, regionTypeColors[i]);
         }
-    Renderer2D.COLOR.render(null);
+        Renderer2D.COLOR.render(null);
 
         TextRenderer.get().begin(1.0, false, true);
         for (int i = 0; i < regionTypes.length; i++) {
@@ -280,10 +267,7 @@ public class RegionMap extends Module {
             if (isValidGridPosition(gridPos[0], gridPos[1])) {
                 int index = gridPos[1] * MAP_SIZE + gridPos[0];
                 RegionInfo info = regionMap.get(index);
-                if (info != null && info.regionType >= 0 && info.regionType < regionTypeNames.length) {
-                    return regionTypeNames[info.regionType];
-                }
-                return "Unknown";
+                return info != null ? regionTypeNames[info.regionType] : "Unknown";
             }
             return "Unknown";
         }
@@ -308,14 +292,8 @@ public class RegionMap extends Module {
         }
 
         public double[] worldToCellPosition(double worldX, double worldZ) {
-            double nx = (worldX + MAP_OFFSET);
-            double nz = (worldZ + MAP_OFFSET);
-            double remX = nx % REGION_SIZE;
-            double remZ = nz % REGION_SIZE;
-            if (remX < 0) remX += REGION_SIZE;
-            if (remZ < 0) remZ += REGION_SIZE;
-            double cellX = remX / REGION_SIZE;
-            double cellZ = remZ / REGION_SIZE;
+            double cellX = ((worldX + MAP_OFFSET) % REGION_SIZE) / REGION_SIZE;
+            double cellZ = ((worldZ + MAP_OFFSET) % REGION_SIZE) / REGION_SIZE;
             return new double[]{cellX, cellZ};
         }
 
@@ -374,7 +352,7 @@ public class RegionMap extends Module {
 
             Renderer2D.COLOR.begin();
             Renderer2D.COLOR.quad(ctx.mapX, ctx.mapY, ctx.getMapWidth(), ctx.getMapHeight(), bgColor);
-    Renderer2D.COLOR.render(null);
+            Renderer2D.COLOR.render(null);
         }
 
         void renderRegionCells(MapRenderContext ctx, MapDataManager dataManager) {
