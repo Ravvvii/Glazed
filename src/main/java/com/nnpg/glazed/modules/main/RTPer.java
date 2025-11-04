@@ -380,7 +380,7 @@ public class RTPer extends Module {
             if (disconnectOnReach.get()) {
                 info("Disconnecting...");
                 if (mc.world != null) {
-                      mc.world.disconnect(net.minecraft.text.Text.of("Disconnected by addon"));
+                    mc.world.disconnect(Text.literal(""));
                 }
             }
 
@@ -483,11 +483,11 @@ public class RTPer extends Module {
                     return;
                 }
                 if (mc.world != null) {
-                      mc.world.disconnect(net.minecraft.text.Text.of("Disconnected by addon"));
+                    mc.world.disconnect(Text.literal(""));
                 }
             }
         } catch (Exception ignored) {
-              if (mc != null && mc.world != null) mc.world.disconnect(net.minecraft.text.Text.of("Disconnected by addon"));
+            if (mc != null && mc.world != null) mc.world.disconnect(Text.literal(""));
         }
     }
 

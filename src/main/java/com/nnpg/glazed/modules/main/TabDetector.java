@@ -4,7 +4,7 @@ import com.nnpg.glazed.GlazedAddon;
 import meteordevelopment.meteorclient.events.world.TickEvent;
 import meteordevelopment.meteorclient.settings.*;
 import meteordevelopment.meteorclient.systems.modules.Module;
-import net.minecraft.client.toast.SystemToast;
+import com.nnpg.glazed.utils.ToastCompat;
 import meteordevelopment.orbit.EventHandler;
 import net.minecraft.client.network.PlayerListEntry;
 import net.minecraft.item.Items;
@@ -91,12 +91,12 @@ public class TabDetector extends Module {
             case Chat -> info(message);
             case Toast -> {
                 String toastMessage = players.size() == 1 ? "Target Player Joined!" : "Target Players Joined!";
-                mc.getToastManager().add(new SystemToast(SystemToast.Type.WORLD_BACKUP, net.minecraft.text.Text.of(title), net.minecraft.text.Text.of(toastMessage)));
+                ToastCompat.show(Items.PLAYER_HEAD, "TabDetector", toastMessage);
             }
             case Both -> {
                 info(message);
                 String toastMessage = players.size() == 1 ? "Target Player Joined!" : "Target Players Joined!";
-                mc.getToastManager().add(new SystemToast(SystemToast.Type.WORLD_BACKUP, net.minecraft.text.Text.of(title), net.minecraft.text.Text.of(toastMessage)));
+                ToastCompat.show(Items.PLAYER_HEAD, "TabDetector", toastMessage);
             }
         }
 
@@ -112,12 +112,12 @@ public class TabDetector extends Module {
             case Chat -> info(message);
             case Toast -> {
                 String toastMessage = players.size() == 1 ? "Target Player Left!" : "Target Players Left!";
-                mc.getToastManager().add(new SystemToast(SystemToast.Type.WORLD_BACKUP, net.minecraft.text.Text.of(title), net.minecraft.text.Text.of(toastMessage)));
+                ToastCompat.show(Items.BARRIER, "TabDetector", toastMessage);
             }
             case Both -> {
                 info(message);
                 String toastMessage = players.size() == 1 ? "Target Player Left!" : "Target Players Left!";
-                mc.getToastManager().add(new SystemToast(SystemToast.Type.WORLD_BACKUP, net.minecraft.text.Text.of(title), net.minecraft.text.Text.of(toastMessage)));
+                ToastCompat.show(Items.BARRIER, "TabDetector", toastMessage);
             }
         }
 

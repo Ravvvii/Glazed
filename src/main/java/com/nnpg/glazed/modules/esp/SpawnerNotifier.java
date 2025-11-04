@@ -5,7 +5,7 @@ import meteordevelopment.meteorclient.events.render.Render3DEvent;
 import meteordevelopment.meteorclient.events.world.ChunkDataEvent;
 import meteordevelopment.meteorclient.events.world.TickEvent;
 import meteordevelopment.meteorclient.renderer.ShapeMode;
-import net.minecraft.client.toast.SystemToast;
+import com.nnpg.glazed.utils.ToastCompat;
 import meteordevelopment.meteorclient.settings.*;
 import meteordevelopment.meteorclient.systems.modules.Module;
 import meteordevelopment.meteorclient.utils.render.color.Color;
@@ -308,7 +308,7 @@ public class SpawnerNotifier extends Module {
 
     private void show_toast_notification(String message) {
         try {
-              mc.getToastManager().add(new SystemToast(SystemToast.Type.WORLD_BACKUP, net.minecraft.text.Text.of(title), net.minecraft.text.Text.of(message)));
+            ToastCompat.show(Items.SPAWNER, "Spawner Notifier", message);
         } catch (Exception e) {
             info(message);
         }

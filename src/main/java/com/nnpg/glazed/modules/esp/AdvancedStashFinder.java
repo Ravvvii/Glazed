@@ -17,7 +17,7 @@ import meteordevelopment.meteorclient.pathing.PathManagers;
 import meteordevelopment.meteorclient.settings.*;
 import meteordevelopment.meteorclient.systems.modules.Module;
 import meteordevelopment.meteorclient.utils.Utils;
-import net.minecraft.client.toast.SystemToast;
+import com.nnpg.glazed.utils.ToastCompat;
 import meteordevelopment.orbit.EventHandler;
 import net.minecraft.block.entity.*;
 import net.minecraft.item.Items;
@@ -30,6 +30,7 @@ import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 import java.time.Duration;
+import net.minecraft.text.Text;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
@@ -201,11 +202,11 @@ public class AdvancedStashFinder extends Module {
                 switch (notificationMode.get()) {
                     case Chat -> info("Found %s at (highlight)%s(default), (highlight)%s(default). %s", stashType, chunk.x, chunk.z, detectionReason);
                     case Toast -> {
-                          mc.getToastManager().add(new SystemToast(SystemToast.Type.WORLD_BACKUP, net.minecraft.text.Text.of(title), net.minecraft.text.Text.of("Found " + stashType.substring(0, 1).toUpperCase() + stashType.substring(1) + "!")));
+                        ToastCompat.show(Items.CHEST, "Advanced Stashfinder", "Found " + stashType.substring(0, 1).toUpperCase() + stashType.substring(1) + "!");
                     }
                     case Both -> {
                         info("Found %s at (highlight)%s(default), (highlight)%s(default). %s", stashType, chunk.x, chunk.z, detectionReason);
-                        mc.getToastManager().add(new SystemToast(SystemToast.Type.WORLD_BACKUP, net.minecraft.text.Text.of(title), net.minecraft.text.Text.of("Found " + stashType.substring(0, 1).toUpperCase() + stashType.substring(1) + "!")));
+                        ToastCompat.show(Items.CHEST, "Advanced Stashfinder", "Found " + stashType.substring(0, 1).toUpperCase() + stashType.substring(1) + "!");
                     }
                 }
             }
@@ -214,12 +215,12 @@ public class AdvancedStashFinder extends Module {
                 sendWebhookNotification(chunk, isCriticalSpawner, detectionReason);
             }
 
-            if (disconnectOnFind.get() && isNewOrUpdated) {
+                if (disconnectOnFind.get() && isNewOrUpdated) {
                 //info("Base Found - Disconnecting at (highlight)%s(default), (highlight)%s(default)", chunk.x, chunk.z);
                 toggle();
 
                 if (mc.world != null) {
-                      mc.world.disconnect(net.minecraft.text.Text.of("Disconnected by addon"));
+                    mc.world.disconnect(Text.literal(""));
                 }
             }
         }

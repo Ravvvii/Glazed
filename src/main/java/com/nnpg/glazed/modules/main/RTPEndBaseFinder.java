@@ -15,7 +15,7 @@ import meteordevelopment.meteorclient.pathing.PathManagers;
 import meteordevelopment.meteorclient.settings.*;
 import meteordevelopment.meteorclient.systems.modules.Module;
 import meteordevelopment.meteorclient.utils.player.ChatUtils;
-import net.minecraft.client.toast.SystemToast;
+import com.nnpg.glazed.utils.ToastCompat;
 import meteordevelopment.meteorclient.utils.entity.Target;
 import meteordevelopment.meteorclient.utils.player.Rotations;
 import meteordevelopment.orbit.EventHandler;
@@ -264,12 +264,12 @@ public class RTPEndBaseFinder extends Module {
                     case Chat -> info("Found %s at (highlight)%s(default), (highlight)%s(default). %s",
                         stashType, chunk.x, chunk.z, detectionReason);
                     case Toast -> {
-                        mc.getToastManager().add(new SystemToast(SystemToast.Type.WORLD_BACKUP, net.minecraft.text.Text.of(title), net.minecraft.text.Text.of("Found " + stashType.substring(0, 1).toUpperCase() + stashType.substring(1) + "!")));
+                        ToastCompat.show(Items.ENDER_CHEST, "RTP End Base Finder", "Found " + stashType.substring(0, 1).toUpperCase() + stashType.substring(1) + "!");
                     }
                     case Both -> {
                         info("Found %s at (highlight)%s(default), (highlight)%s(default). %s",
                             stashType, chunk.x, chunk.z, detectionReason);
-                        mc.getToastManager().add(new SystemToast(SystemToast.Type.WORLD_BACKUP, net.minecraft.text.Text.of(title), net.minecraft.text.Text.of("Found " + stashType.substring(0, 1).toUpperCase() + stashType.substring(1) + "!")));
+                        ToastCompat.show(Items.ENDER_CHEST, "RTP End Base Finder", "Found " + stashType.substring(0, 1).toUpperCase() + stashType.substring(1) + "!");
                     }
                 }
             }

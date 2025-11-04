@@ -5,7 +5,7 @@ import com.nnpg.glazed.VersionUtil; // For 1.21.4 - change to VersionUtil2 for 1
 import meteordevelopment.meteorclient.events.render.Render3DEvent;
 import meteordevelopment.meteorclient.settings.*;
 import meteordevelopment.meteorclient.systems.modules.Module;
-import net.minecraft.client.toast.SystemToast;
+import com.nnpg.glazed.utils.ToastCompat;
 import meteordevelopment.meteorclient.utils.render.RenderUtils;
 import meteordevelopment.meteorclient.utils.render.color.Color;
 import meteordevelopment.meteorclient.utils.render.color.SettingColor;
@@ -184,10 +184,10 @@ public class VillagerESP extends Module {
 
         switch (notificationMode.get()) {
             case Chat -> info("(highlight)%s", message);
-            case Toast -> mc.getToastManager().add(new SystemToast(SystemToast.Type.WORLD_BACKUP, net.minecraft.text.Text.of(title), net.minecraft.text.Text.of(message)));
+            case Toast -> ToastCompat.show(Items.EMERALD, "VillagerESP", message);
             case Both -> {
                 info("(highlight)%s", message);
-                mc.getToastManager().add(new SystemToast(SystemToast.Type.WORLD_BACKUP, net.minecraft.text.Text.of(title), net.minecraft.text.Text.of(message)));
+                ToastCompat.show(Items.EMERALD, "VillagerESP", message);
             }
         }
 

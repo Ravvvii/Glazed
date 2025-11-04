@@ -5,7 +5,7 @@ import meteordevelopment.meteorclient.events.render.Render3DEvent;
 import meteordevelopment.meteorclient.settings.*;
 import meteordevelopment.meteorclient.systems.modules.Module;
 import meteordevelopment.meteorclient.utils.player.ChatUtils;
-import net.minecraft.client.toast.SystemToast;
+import com.nnpg.glazed.utils.ToastCompat;
 import meteordevelopment.orbit.EventHandler;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Items;
@@ -168,10 +168,10 @@ public class PlayerDetection extends Module {
 
         switch (notificationMode.get()) {
             case Chat -> info("Player(s) detected: (highlight)%s", playerList);
-            case Toast -> mc.getToastManager().add(new SystemToast(SystemToast.Type.WORLD_BACKUP, net.minecraft.text.Text.of(title), net.minecraft.text.Text.of("Player Detected!")));
+            case Toast -> ToastCompat.show(Items.PLAYER_HEAD, "Player Detection", "Player Detected!");
             case Both -> {
                 info("Player(s) detected: (highlight)%s", playerList);
-                mc.getToastManager().add(new SystemToast(SystemToast.Type.WORLD_BACKUP, net.minecraft.text.Text.of(title), net.minecraft.text.Text.of("Player Detected!")));
+                ToastCompat.show(Items.PLAYER_HEAD, "Player Detection", "Player Detected!");
             }
         }
 

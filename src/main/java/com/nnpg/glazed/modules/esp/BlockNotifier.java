@@ -7,7 +7,7 @@ import meteordevelopment.meteorclient.events.world.TickEvent;
 import meteordevelopment.meteorclient.renderer.ShapeMode;
 import meteordevelopment.meteorclient.settings.*;
 import meteordevelopment.meteorclient.systems.modules.Module;
-import net.minecraft.client.toast.SystemToast;
+import com.nnpg.glazed.utils.ToastCompat;
 import meteordevelopment.meteorclient.utils.render.color.Color;
 import meteordevelopment.meteorclient.utils.render.color.SettingColor;
 import meteordevelopment.orbit.EventHandler;
@@ -341,7 +341,7 @@ public class BlockNotifier extends Module {
     private void show_toast_notification(String message, Map<Block, Integer> found_blocks) {
         try {
             Block first_block = found_blocks.keySet().iterator().next();
-              mc.getToastManager().add(new SystemToast(SystemToast.Type.WORLD_BACKUP, net.minecraft.text.Text.of(title), net.minecraft.text.Text.of(message)));
+            ToastCompat.show(new ItemStack(first_block.asItem()).getItem(), "Block Notifier", message);
         } catch (Exception e) {
             info(message);
         }
