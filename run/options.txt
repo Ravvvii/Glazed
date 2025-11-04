@@ -52,7 +52,7 @@ damageTiltStrength:1.0
 highContrast:false
 highContrastBlockOutline:false
 narratorHotkey:true
-resourcePacks:["fabric","fabric-api-base","fabric-resource-loader-v0","fabricloader","glazed","meteor-client"]
+resourcePacks:["fabric"]
 incompatibleResourcePacks:[]
 lastServer:
 lang:en_us
@@ -88,9 +88,9 @@ allowServerListing:true
 onlyShowSecureChat:false
 panoramaScrollSpeed:1.0
 telemetryOptInExtra:false
-onboardAccessibility:true
+onboardAccessibility:false
 menuBackgroundBlurriness:5
-startedCleanly:false
+startedCleanly:true
 showNowPlayingToast:false
 musicFrequency:"DEFAULT"
 key_key.attack:key.mouse.left
