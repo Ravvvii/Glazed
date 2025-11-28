@@ -1,0 +1,41 @@
+name: Build Glazed Mod
+
+on:
+  push:
+    # Trigger pada setiap push ke branch manapun, file apapun
+  workflow_dispatch:
+    # Trigger manual
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Set up JDK 21
+        uses: actions/setup-java@v4
+        with:
+          java-version: '21'  # MC 1.21.4 membutuhkan Java 21
+          distribution: 'temurin'
+
+      - name: Setup Gradle
+        uses: gradle/actions/setup-gradle@v4
+        # Action ini otomatis menangani caching agar build selanjutnya lebih cepat
+
+      - name: Make gradlew executable
+        run: chmod +x gradlew
+
+      - name: Build
+        # Menggunakan ./gradlew build. 
+        # Properti seperti -Xmx2G akan otomatis terbaca dari file gradle.properties di repo Anda.
+        run: ./gradlew build
+
+      - name: Upload Artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          # Memberi nama artifact dengan nomor urut run agar unik
+          name: Glazed-Build-${{ github.run_number }}
+          path: build/libs/
+          retention-days: 1
